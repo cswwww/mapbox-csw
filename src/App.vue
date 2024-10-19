@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { markRaw, onMounted } from "vue";
+import { onMounted } from "vue";
 import { Map } from "mapbox-gl";
-import { RasterLayer } from "./map/index.js";
+// import { FillLayer, DrawLine } from "./map/index.js";
+// import fillData from "./data/fill.json";
+// import { polygonCut } from "./map/tool/editVector.js";
+// import * as turf from "@turf/turf";
 onMounted(() => {
   const singleMap = new Map({
     accessToken:
@@ -45,17 +48,32 @@ onMounted(() => {
       },
     });
 
-    singleMap.addLayer({
-      type: "raster",
-      id: "离线底图",
-      source: {
-        type: "raster",
-        tiles: [
-          "http://localhost:81/{z}/{x}/{y}.png", // 替换为你的本地服务器地址
-        ],
-        tileSize: 256, // 分辨率
-      },
-    });
+    // new FillLayer(
+    //   fillData,
+    //   "矢量面",
+    //   {
+    //     paint: {
+    //       "fill-color": "#000",
+    //       "fill-outline-color": "#0f0",
+    //     },
+    //   },
+    //   singleMap
+    // );
+    // const draw = new DrawLine(singleMap, (data: any) => {
+    //   console.log(data);
+    //   const lineString = turf.lineString(data);
+
+    //   const result = polygonCut(
+    //     fillData.features[0],
+    //     lineString,
+    //     0.001,
+    //     "kilometers"
+    //   );
+    //   console.log("result: ", result);
+
+    //   // singleMap.getSource("矢量面").setData(result);
+    // });
+    // draw.start();
   });
 });
 </script>

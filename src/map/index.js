@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-01-13 17:06:20
  * @LastEditors: ReBeX  cswwwx@gmail.com
- * @LastEditTime: 2024-09-15 16:52:52
+ * @LastEditTime: 2024-10-19 15:52:08
  * @FilePath: \mapbox-re\src\map\index.js
  * @Description: 地圖相关方法
  */
@@ -32,15 +32,15 @@ export { FillExtrusionLayer } from "./layer/fillExtrusionLayer.js"; // 拔高图
 export { loadLayerGroupsFucntion } from "./layer/layerGroup.js"; // 图层 - 组
 
 // ! 地图工具方法及类
-export { DrawRectangle, DrawCurve } from "./tool/drawVector"; // 绘制矩形
-export { DistanceMeasurement, AreaMeasurement } from "./tool/measureTool"; // 测量工具
+export { DrawRectangle, DrawCurve, DrawLine } from "./tool/drawVector.js"; // 绘制矩形
+export { DistanceMeasurement, AreaMeasurement } from "./tool/measureTool.js"; // 测量工具
 export {
   getPointDistance,
   getLineDistance,
   getPolygonArea,
   exportMap,
   isValidLngLat,
-} from "./tool/mapUtils";
+} from "./tool/mapUtils.js";
 export {
   flyToFeature,
   flyToPoint,
@@ -50,3 +50,9 @@ export { loadBaseControl } from "./tool/baseControl.js"; // 地图 - 控件
 
 // ! 网络请求
 export { loadMapImage, loadMapIcon } from "./request/mapService.js";
+
+// ! 矢量编辑
+export { geoUtil, polygonCut } from "./tool/editVector.js";
+
+// ! 数据格式化
+export { fixPolygonDirection } from "./tool/dataFormat.js";
