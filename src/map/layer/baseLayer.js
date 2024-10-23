@@ -23,13 +23,13 @@ const baseLayer = [
     layer: [
       {
         name: '图层',
-        url: 'http://t0.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=' + tdtToken
+        url: `http://t0.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=${tdtToken}`,
       },
       {
         name: '注记',
-        url: 'http://t0.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=' + tdtToken
-      }
-    ]
+        url: `http://t0.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=${tdtToken}`,
+      },
+    ],
   },
   {
     id: '天地图影像',
@@ -37,36 +37,36 @@ const baseLayer = [
     layer: [
       {
         name: '图层',
-        url: 'http://t1.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=' + tdtToken
+        url: `http://t1.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=${tdtToken}`,
       },
       {
         name: '注记',
-        url: 'http://t1.tianditu.com/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=' + tdtToken
-      }
-    ]
-  }
+        url: `http://t1.tianditu.com/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=${tdtToken}`,
+      },
+    ],
+  },
 ]
 
 // 加入外部xyz格式的栅格图层
 function xyz(url, id, map) {
   map.addLayer({
     type: 'raster',
-    id: id,
+    id,
     source: {
       type: 'raster',
       tiles: [url],
-      tileSize: 256 // 分辨率
+      tileSize: 256, // 分辨率
     },
     metadata: {
-      group: ['底图']
-    }
+      group: ['底图'],
+    },
   })
 }
 
 /**
  * Loads the base layer for the map.
  *
- * @param {Object} map - The map object.
+ * @param {object} map - The map object.
  * @return {undefined} This function does not return a value.
  */
 function loadBaseLayer(map) {
@@ -82,10 +82,10 @@ function loadBaseLayer(map) {
 /**
  * Updates the base layer display by controlling the visibility of the layers.
  *
- * @param {Object} map - The map object.
+ * @param {object} map - The map object.
  * @return {undefined} This function does not return a value.
  */
-const updateBaseLayer = (map) => {
+function updateBaseLayer(map) {
   baseLayer.forEach((item) => {
     item.layer.forEach((layer) => {
       map.setLayoutProperty(item.id + layer.name, 'visibility', item.show ? 'visible' : 'none') // 控制图层显隐

@@ -7,7 +7,7 @@
  * @ref: https://docs.mapbox.com/style-spec/reference/layers/#fill
  */
 
-import { VectorLayer } from '../index.js'
+import { VectorLayer } from './vectorLayer'
 
 /**
  * Creates a new instance of the fillLayer class.
@@ -23,18 +23,18 @@ export class FillLayer extends VectorLayer {
       type: 'fill',
       layout: {
         'fill-sort-key': 1,
-        'visibility': 'visible' // "visible", "none"
+        'visibility': 'visible', // "visible", "none"
       },
       paint: {
         'fill-antialias': true,
         'fill-color': '#000000',
         'fill-opacity': 1,
-        'fill-outline-color': 'black'
+        'fill-outline-color': 'black',
         // 'fill-emissive-strength': 0, // Requires lights Supports
         // 'fill-pattern': 'Name of image',
         // 'fill-translate': [0,0],
         // 'fill-translate-anchor': "map",
-      }
+      },
     }
     // 对传入的参数则进行处理
     if (option instanceof Object) {

@@ -7,7 +7,7 @@
  * @ref: https://docs.mapbox.com/style-spec/reference/layers/#fill-extrusion
  */
 
-import { VectorLayer } from '../index.js'
+import { VectorLayer } from './vectorLayer'
 
 /**
  * Creates a new instance of the fillLayer class.
@@ -24,8 +24,8 @@ export class FillExtrusionLayer extends VectorLayer {
       type: 'fill-extrusion',
       paint: {
         'fill-extrusion-color': '#000000',
-        'fill-extrusion-height': ['get', 'Height']
-      }
+        'fill-extrusion-height': ['get', 'Height'],
+      },
     }
     // 对传入的参数则进行处理
     if (option instanceof Object) {

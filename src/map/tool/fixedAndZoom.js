@@ -12,11 +12,11 @@ import { isValidLngLat } from '../index.js'
 /**
  * Fly to the specified feature on the map and fit the map bounds accordingly.
  *
- * @param {Object} feature - The feature to fly to
- * @param {Object} option - Additional options for the map fit
- * @param {Object} map - The map object to fly to the feature on
+ * @param {object} feature - The feature to fly to
+ * @param {object} option - Additional options for the map fit
+ * @param {object} map - The map object to fly to the feature on
  */
-export const flyToFeature = (feature, option, map) => {
+export function flyToFeature(feature, option, map) {
   const border = bbox(feature) // 獲取feature的經緯度範圍
   if (!isValidLngLat([border[0], border[1]]) || !isValidLngLat([border[2], border[3]])) {
     return
@@ -25,7 +25,7 @@ export const flyToFeature = (feature, option, map) => {
     // 根據範圍定位
     [
       [border[0], border[1]],
-      [border[2], border[3]]
+      [border[2], border[3]],
     ],
     {
       // 默认为false，决定了跳转的地图过渡动画
@@ -40,8 +40,8 @@ export const flyToFeature = (feature, option, map) => {
       animate: true,
       // 动画的持续时间，以毫秒为单位
       duration: 2000,
-      ...option
-    }
+      ...option,
+    },
   )
 }
 
@@ -49,10 +49,10 @@ export const flyToFeature = (feature, option, map) => {
  * Fly to a specific point on the map with customizable options.
  *
  * @param {Array<number>} lngLat - The longitude and latitude of the point to fly to
- * @param {Object} option - Customizable options for the fly animation
- * @param {Object} map - The map object to fly on
+ * @param {object} option - Customizable options for the fly animation
+ * @param {object} map - The map object to fly on
  */
-export const flyToPoint = (lngLat, option, map) => {
+export function flyToPoint(lngLat, option, map) {
   if (!isValidLngLat(lngLat)) {
     console.log('無效的坐標值')
     return
@@ -68,18 +68,18 @@ export const flyToPoint = (lngLat, option, map) => {
     // },
     // maxDuration: 1000,
     // screenSpeed: 0.1,
-    ...option
+    ...option,
     // ...CameraOptions, // https://docs.mapbox.com/mapbox-gl-js/api/properties/#cameraoptions
     // ...AnimationOptions, // https://docs.mapbox.com/mapbox-gl-js/api/properties/#animationoptions
   })
 }
 
-export const flyToGuangdong = (map) => {
+export function flyToGuangdong(map) {
   map.flyTo({
     curve: 1.42,
     speed: 1.2,
     center: [113.2435, 23.136],
     duration: 1000,
-    zoom: 6.5
+    zoom: 6.5,
   })
 }

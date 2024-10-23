@@ -27,7 +27,7 @@ export class LineLayer extends VectorLayer {
         'line-miter-limit': 2, // Requires line-join to be "miter"
         // 'line-round-limit': 1.05, //  Requires line-join to be "round"
         'line-sort-key': 1,
-        'visibility': 'visible' // "visible", "none"
+        'visibility': 'visible', // "visible", "none"
       },
       paint: {
         'line-blur': 0,
@@ -42,8 +42,8 @@ export class LineLayer extends VectorLayer {
         // 'line-translate': [0,0],
         // 'line-translate-anchor': "map",
         // 'line-trim-offset': [0, 0], // Requires source to be "geojson"
-        'line-width': 1
-      }
+        'line-width': 1,
+      },
     }
     // 对传入的参数则进行处理
     if (option instanceof Object) {

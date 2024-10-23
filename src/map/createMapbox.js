@@ -1,8 +1,8 @@
 /*
  * @Date: 2023-12-18 15:07:10
  * @LastEditors: ReBeX  cswwwx@gmail.com
- * @LastEditTime: 2024-09-15 16:41:58
- * @FilePath: \mapbox-re\src\map\createMapbox.js
+ * @LastEditTime: 2024-10-23 18:40:01
+ * @FilePath: \mapbox-csw\src\map\createMapbox.js
  * @Description: 创建地图单例
  */
 
@@ -34,7 +34,7 @@ const mapOption = {
   // pitch: 30,
   zoom: 2,
   maxZoom: 17,
-  minZoom: 1
+  minZoom: 1,
 }
 
 class MapInstance {
@@ -59,12 +59,12 @@ class MapInstance {
             id: '_background',
             type: 'background',
             paint: {
-              'background-color': '#000c29'
-            }
-          }
-        ]
+              'background-color': '#000c29',
+            },
+          },
+        ],
       },
-      ...option
+      ...option,
     })
 
     map.dragRotate.disable() // 禁用右键旋转
@@ -92,8 +92,8 @@ function createMap(
     projection: 'mercator',
     zoom: 2,
     maxZoom: 17,
-    minZoom: 1
-  }
+    minZoom: 1,
+  },
 ) {
   const singleMap = new Map({
     // locale,
@@ -110,12 +110,12 @@ function createMap(
           id: 'background',
           type: 'background',
           paint: {
-            'background-color': '#000c29'
-          }
-        }
-      ]
+            'background-color': '#000c29',
+          },
+        },
+      ],
     },
-    ...option
+    ...option,
   })
   singleMap.dragRotate.disable() // 禁用右键旋转
   singleMap._logoControl && singleMap.removeControl(singleMap._logoControl)
@@ -126,4 +126,4 @@ function createMap(
   return singleMap
 }
 
-export { MapInstance, createMap }
+export { createMap, MapInstance }

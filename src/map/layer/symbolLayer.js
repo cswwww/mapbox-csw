@@ -66,7 +66,7 @@ export class SymbolLayer extends VectorLayer {
         'text-transform': 'none', // "none", "uppercase", "lowercase"
         // 'text-variable-anchor': "center",
         'text-writing-mode': 'horizontal', // "horizontal", "vertical", "cubic"
-        visibility: 'visible' // "visible", "none"
+        'visibility': 'visible', // "visible", "none"
       },
       paint: {
         'icon-color': '#000000',
@@ -85,8 +85,8 @@ export class SymbolLayer extends VectorLayer {
         'text-halo-width': 0,
         'text-opacity': 1,
         'text-translate': [0, 0],
-        'text-translate-anchor': 'map' // One of "map", "viewport".
-      }
+        'text-translate-anchor': 'map', // One of "map", "viewport".
+      },
     }
     // 对传入的参数则进行处理
     if (option instanceof Object) {

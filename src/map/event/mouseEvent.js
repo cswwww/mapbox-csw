@@ -7,7 +7,7 @@
  */
 
 // 鼠标移动事件监听器
-const pointerCursor = (map, layerName) => {
+function pointerCursor(map, layerName) {
   map.on('mousemove', layerName, () => {
     map.getCanvas().style.cursor = 'pointer' // 改变鼠标指针样式为点
   })

@@ -1,7 +1,7 @@
 /**
  * Spins the globe based on the zoom level of the map.
  * ref: https://docs.mapbox.com/mapbox-gl-js/example/globe-spin/
- * 
+ *
  * map.once('moveend', () => {
  *   spinGlobe(map) // 地图旋转
  * })
@@ -25,10 +25,10 @@ function spinGlobe(map) {
     }
     const center = map.getCenter()
     center.lng -= distancePerSecond
-    map.easeTo({ center, duration: 1000, easing: (n) => n })
+    map.easeTo({ center, duration: 1000, easing: n => n })
   }
 }
 
 export {
-  spinGlobe
+  spinGlobe,
 }

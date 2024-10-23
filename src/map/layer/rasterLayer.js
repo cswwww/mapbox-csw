@@ -6,11 +6,10 @@
  * @Description: 图层 - 栅格图层
  */
 
-
 const rasterOptions = {
   type: 'raster',
   layout: {
-    visibility: 'visible' // "visible", "none"
+    visibility: 'visible', // "visible", "none"
   },
   paint: {
     'raster-brightness-max': 1,
@@ -23,8 +22,8 @@ const rasterOptions = {
     'raster-hue-rotate': 0,
     'raster-opacity': 1,
     'raster-resampling': 'linear', // "linear", "nearest".
-    'raster-saturation': 0 // between -1 and 1
-  }
+    'raster-saturation': 0, // between -1 and 1
+  },
 }
 
 class RasterLayer {
@@ -40,7 +39,7 @@ class RasterLayer {
       source: this.layerName,
       minzoom: 0,
       maxzoom: 22,
-      ...rasterOptions
+      ...rasterOptions,
     }
 
     // 对传入的参数则进行处理
@@ -51,7 +50,7 @@ class RasterLayer {
     this.map.addSource(layerName, {
       type: 'raster',
       tiles: [this.url],
-      tileSize: 256
+      tileSize: 256,
       // 'attribution': '',
       // 'bounds': bounds
     })

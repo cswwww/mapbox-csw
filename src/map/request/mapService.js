@@ -7,33 +7,35 @@
  */
 
 // 地图：加载图片
-export const loadMapImage = (map, imageUrl, imageId, callback) => {
+export function loadMapImage(map, imageUrl, imageId, callback) {
   if (map.hasImage(imageId)) {
-    callback();
-  } else {
-    map.loadImage(imageUrl, function (error, image) {
-      if (error) {
-        console.error("图片加载失败:", error);
-        return;
-      }
-      map.addImage(imageId, image);
-      callback();
-    });
+    callback()
   }
-};
+  else {
+    map.loadImage(imageUrl, (error, image) => {
+      if (error) {
+        console.error('图片加载失败:', error)
+        return
+      }
+      map.addImage(imageId, image)
+      callback()
+    })
+  }
+}
 
 // 地图：加载图标（sdf图片）
-export const loadMapIcon = (map, imageUrl, imageId, callback) => {
+export function loadMapIcon(map, imageUrl, imageId, callback) {
   if (map.hasImage(imageId)) {
-    callback();
-  } else {
-    map.loadImage(imageUrl, function (error, image) {
-      if (error) {
-        console.error("图片加载失败:", error);
-        return;
-      }
-      map.addImage(imageId, image, { sdf: true });
-      callback();
-    });
+    callback()
   }
-};
+  else {
+    map.loadImage(imageUrl, (error, image) => {
+      if (error) {
+        console.error('图片加载失败:', error)
+        return
+      }
+      map.addImage(imageId, image, { sdf: true })
+      callback()
+    })
+  }
+}

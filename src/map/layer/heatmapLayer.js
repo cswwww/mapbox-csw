@@ -35,16 +35,16 @@ export class HeatMapLayerInstance {
             0.7,
             'yellow',
             1,
-            'red'
+            'red',
           ],
           'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 0, 1, 18, 3], // default 1
           'heatmap-opacity': 1,
           'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 2, 18, 20],
-          'heatmap-weight': 1
+          'heatmap-weight': 1,
         },
         layout: {
-          visibility: 'visible'
-        }
+          visibility: 'visible',
+        },
       }
 
       // 对传入的参数则进行处理
@@ -55,8 +55,8 @@ export class HeatMapLayerInstance {
         type: 'geojson',
         data: this.feature || {
           type: 'FeatureCollection',
-          features: []
-        }
+          features: [],
+        },
       })
       this.map.addLayer(this.options)
       HeatMapLayerInstance.instance = this
@@ -76,13 +76,14 @@ export class HeatMapLayerInstance {
     this.features = feature
     if (this.map.getSource(this.layerName)) {
       this.map.getSource(this.layerName).setData(feature)
-    } else {
+    }
+    else {
       this.map.addSource(this.layerName, {
         type: 'geojson',
         data: feature || {
           type: 'FeatureCollection',
-          features: []
-        }
+          features: [],
+        },
       })
       this.map.addLayer(this.options)
     }
@@ -122,16 +123,16 @@ export class HeatMapLayer {
           0.7,
           'yellow',
           1,
-          'red'
+          'red',
         ],
         'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 0, 1, 18, 3], // default 1
         'heatmap-opacity': 1,
         'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 0, 2, 18, 20],
-        'heatmap-weight': 1
+        'heatmap-weight': 1,
       },
       layout: {
-        visibility: 'visible'
-      }
+        visibility: 'visible',
+      },
     }
 
     // 对传入的参数则进行处理
@@ -142,8 +143,8 @@ export class HeatMapLayer {
       type: 'geojson',
       data: this.feature || {
         type: 'FeatureCollection',
-        features: []
-      }
+        features: [],
+      },
     })
     this.map.addLayer(this.options)
     HeatMapLayer.instance = this
@@ -158,13 +159,14 @@ export class HeatMapLayer {
     this.features = feature
     if (this.map.getSource(this.sourceID)) {
       this.map.getSource(this.sourceID).setData(feature)
-    } else {
+    }
+    else {
       this.map.addSource(this.sourceID, {
         type: 'geojson',
         data: feature || {
           type: 'FeatureCollection',
-          features: []
-        }
+          features: [],
+        },
       })
       this.map.addLayer(this.options)
     }

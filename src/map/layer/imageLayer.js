@@ -6,11 +6,10 @@
  * @Description: 图层 - 图片图层
  */
 
-
 const rasterOptions = {
   type: 'raster',
   layout: {
-    visibility: 'visible' // "visible", "none"
+    visibility: 'visible', // "visible", "none"
   },
   paint: {
     'raster-brightness-max': 1,
@@ -20,8 +19,8 @@ const rasterOptions = {
     'raster-hue-rotate': 0,
     'raster-opacity': 1,
     'raster-resampling': 'linear', // "linear", "nearest".
-    'raster-saturation': 0 // between -1 and 1
-  }
+    'raster-saturation': 0, // between -1 and 1
+  },
 }
 
 class ImageLayer {
@@ -38,7 +37,7 @@ class ImageLayer {
       source: this.layerName,
       minzoom: 0,
       maxzoom: 22,
-      ...rasterOptions
+      ...rasterOptions,
     }
 
     // 对传入的参数则进行处理
@@ -49,7 +48,7 @@ class ImageLayer {
     this.map.addSource(layerName, {
       type: 'image',
       url: this.url,
-      coordinates: this.coordinates
+      coordinates: this.coordinates,
     })
     this.map.addLayer(this.options)
   }
@@ -73,14 +72,14 @@ class ImageLayer {
     this.map.fitBounds(
       [
         [this.coordinates[0][0], this.coordinates[0][1]],
-        [this.coordinates[1][0], this.coordinates[2][1]]
+        [this.coordinates[1][0], this.coordinates[2][1]],
       ],
       {
         linear: false,
         animate: true,
         maxDuration: 2000,
-        padding: { top: 200, bottom: 200, left: 500, right: 500 }
-      }
+        padding: { top: 200, bottom: 200, left: 500, right: 500 },
+      },
     )
   }
 }

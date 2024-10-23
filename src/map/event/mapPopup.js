@@ -13,14 +13,14 @@ import { createApp } from 'vue'
 /**
  * Function to add an image popup to the map at a specific location.
  *
- * @param {Object} e - The map event object
+ * @param {object} e - The map event object
  * @param {string} url - The URL of the image
- * @param {Object} map - The map object
- * @param {Object} option - Additional options for the popup
- * @return {Object} The newly created popup
+ * @param {object} map - The map object
+ * @param {object} option - Additional options for the popup
+ * @return {object} The newly created popup
  */
 
-const addImgPopup = (e, url, map, option) => {
+function addImgPopup(e, url, map, option) {
   const lngLat = e.features[0].geometry.coordinates.slice() // copy the coordinates
 
   while (Math.abs(e.lngLat.lng - lngLat[0]) > 180) {
@@ -36,7 +36,7 @@ const addImgPopup = (e, url, map, option) => {
     focusAfterOpen: false,
     maxWidth: '840px',
     offset: 10,
-    ...option
+    ...option,
   })
 
   popup.setLngLat(lngLat).setHTML(`<img class="size-full" src="${url}">`).addTo(map)
@@ -53,7 +53,7 @@ const addImgPopup = (e, url, map, option) => {
  * @param {Map} map - The map to which the popup will be added.
  * @return {Popup} The created popup object.
  */
-const addComponentPopup = (component, feature, lnglat, map) => {
+function addComponentPopup(component, feature, lnglat, map) {
   const popup = new Popup({
     // anchor: 'center', // 'center' , 'top' , 'bottom' , 'left' , 'right' , 'top-left' , 'top-right' , 'bottom-left' , and 'bottom-right'
     className: 'customize-popup',
@@ -62,16 +62,16 @@ const addComponentPopup = (component, feature, lnglat, map) => {
     closeOnMove: false,
     focusAfterOpen: false,
     maxWidth: '240px',
-    offset: 10
+    offset: 10,
   })
 
   const container = document.createElement('div')
   createApp(component, {
-    feature // 传入信息
+    feature, // 传入信息
   }).mount(container)
 
   popup.setLngLat(lnglat).setDOMContent(container).addTo(map)
   return popup
 }
 
-export { addImgPopup, addComponentPopup }
+export { addComponentPopup, addImgPopup }

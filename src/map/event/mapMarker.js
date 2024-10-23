@@ -19,10 +19,10 @@ import { createApp } from 'vue'
  * @param {Map} map - The map to which the marker will be added.
  * @return {Marker} The created marker object.
  */
-const addComponentMarker = (component, lnglat, feature, map) => {
+function addComponentMarker(component, lnglat, feature, map) {
   const container = document.createElement('div')
   createApp(component, {
-    feature: feature // 传入信息
+    feature, // 传入信息
   }).mount(container)
 
   const markerInstance = new Marker({
@@ -37,7 +37,7 @@ const addComponentMarker = (component, lnglat, feature, map) => {
     pitchAlignment: 'auto',
     rotation: 0,
     rotationAlignment: 'auto',
-    scale: 1
+    scale: 1,
   })
 
   markerInstance.setLngLat(lnglat).addTo(map)

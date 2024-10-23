@@ -13,27 +13,27 @@ export class HighlightLayer {
   constructor(feature, map) {
     if (!HighlightLayer.instance) {
       this.map = map
-      this.layerName = 'instance-highlightLayer';
+      this.layerName = 'instance-highlightLayer'
       this.feature = feature
       this.map.addSource(this.layerName, {
         type: 'geojson',
         data: this.feature || {
           type: 'FeatureCollection',
-          features: []
-        }
+          features: [],
+        },
       })
       this.map.addLayer({
         type: 'line',
         id: this.layerName,
         source: this.layerName,
         layout: {
-          'visibility': 'visible'
+          visibility: 'visible',
         },
         paint: {
           'line-color': 'yellow', // #45a2ff
           'line-opacity': 0.8,
-          'line-width': 5
-        }
+          'line-width': 5,
+        },
       })
       HighlightLayer.instance = this
     }
@@ -41,22 +41,23 @@ export class HighlightLayer {
   }
 
   static getInstance() {
-    return HighlightLayer.instance || (HighlightLayer.instance = new HighlightLayer());
+    return HighlightLayer.instance || (HighlightLayer.instance = new HighlightLayer())
   }
 
   // 更新图层
   updateLayer(feature) {
     this.feature = feature || {
       type: 'FeatureCollection',
-      features: []
+      features: [],
     }
     if (this.map.getSource(this.layerName)) {
       this.map.getSource(this.layerName).setData(this.feature)
       this.map.moveLayer(this.layerName, undefined) // 将图层置顶
-    } else {
+    }
+    else {
       this.map.addSource(this.layerName, {
         type: 'geojson',
-        data: this.feature
+        data: this.feature,
       })
       this.map.addLayer(this.options)
       this.map.moveLayer(this.layerName, undefined) // 将图层置顶
@@ -68,8 +69,9 @@ export class HighlightLayer {
     try {
       this.map.removeLayer(this.layerName)
       this.map.removeSource(this.layerName)
-    } catch (err) {
-      console.err('高亮图层移除失败');
+    }
+    catch {
+      console.err('高亮图层移除失败')
     }
   }
 }

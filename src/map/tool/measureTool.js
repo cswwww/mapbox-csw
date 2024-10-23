@@ -28,6 +28,7 @@ class DistanceMeasurement {
     this.end = this.end.bind(this)
     this.dynamicAction = this.dynamicAction.bind(this)
   }
+
   // 初始化图层
   init() {
     // 添加线图层
@@ -36,14 +37,14 @@ class DistanceMeasurement {
       type: 'line',
       source: {
         type: 'geojson',
-        data: this.lineFeatureCollection
+        data: this.lineFeatureCollection,
       },
       paint: {
         'line-color': '#ffff00',
         'line-width': 2,
         'line-opacity': 1,
-        'line-dasharray': [2, 4]
-      }
+        'line-dasharray': [2, 4],
+      },
     })
 
     // 添加动态线图层
@@ -52,14 +53,14 @@ class DistanceMeasurement {
       type: 'line',
       source: {
         type: 'geojson',
-        data: this.lineFeatureCollection
+        data: this.lineFeatureCollection,
       },
       paint: {
         'line-color': '#ffff00',
         'line-width': 2,
         'line-opacity': 1,
-        'line-dasharray': [2, 4]
-      }
+        'line-dasharray': [2, 4],
+      },
     })
 
     // 添加点图层
@@ -68,14 +69,14 @@ class DistanceMeasurement {
       type: 'circle',
       source: {
         type: 'geojson',
-        data: this.pointFeatureCollection
+        data: this.pointFeatureCollection,
       },
       paint: {
         'circle-color': '#ffffff',
         'circle-radius': 3,
         'circle-stroke-width': 2,
-        'circle-stroke-color': '#ffff00'
-      }
+        'circle-stroke-color': '#ffff00',
+      },
     })
   }
 
@@ -85,11 +86,11 @@ class DistanceMeasurement {
     this.resMarkerList = []
     this.pointFeatureCollection = {
       type: 'FeatureCollection',
-      features: []
+      features: [],
     }
     this.lineFeatureCollection = {
       type: 'FeatureCollection',
-      features: []
+      features: [],
     }
 
     this.dynamicMarkDom = document.createElement('div')
@@ -97,7 +98,7 @@ class DistanceMeasurement {
     const option = {
       element: this.dynamicMarkDom,
       anchor: 'left',
-      offset: [8, 0]
+      offset: [8, 0],
     }
     this.dynamicMark = new Marker(option).setLngLat([0, 0]).addTo(this.map)
   }
@@ -164,13 +165,13 @@ class DistanceMeasurement {
     const lineList = this.lineFeatureCollection
 
     if (pointList.features.length > 0) {
-      let prev = pointList.features[pointList.features.length - 1]
+      const prev = pointList.features[pointList.features.length - 1]
       lineList.features.push({
         type: 'Feature',
         geometry: {
           type: 'LineString',
-          coordinates: [prev.geometry.coordinates, lngLat]
-        }
+          coordinates: [prev.geometry.coordinates, lngLat],
+        },
       })
       this.map.getSource('measureLineLayer').setData(lineList)
     }
@@ -179,8 +180,8 @@ class DistanceMeasurement {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: lngLat
-      }
+        coordinates: lngLat,
+      },
     })
     this.map.getSource('measurePointLayer').setData(pointList)
 
@@ -189,11 +190,11 @@ class DistanceMeasurement {
     const option = {
       element: ele,
       anchor: 'left',
-      offset: [8, 0]
+      offset: [8, 0],
     }
 
-    ele.innerHTML =
-      this.nodeCoordinateList.length === 0
+    ele.innerHTML
+      = this.nodeCoordinateList.length === 0
         ? '起点'
         : getLineDistance(this.nodeCoordinateList.concat([lngLat]))
     const marker = new Marker(option).setLngLat(lngLat).addTo(this.map)
@@ -211,12 +212,13 @@ class DistanceMeasurement {
         type: 'Feature',
         geometry: {
           type: 'LineString',
-          coordinates: [prev.geometry.coordinates, lngLat]
-        }
+          coordinates: [prev.geometry.coordinates, lngLat],
+        },
       }
       this.map.getSource('measureDynamicLineLayer').setData(json)
       this.dynamicMarkDom.innerHTML = getLineDistance(this.nodeCoordinateList.concat([lngLat]))
-    } else {
+    }
+    else {
       this.dynamicMarkDom.innerHTML = '单击地图开始测量，双击结束'
     }
     this.dynamicMark.setLngLat(lngLat)
@@ -241,6 +243,7 @@ class AreaMeasurement {
     this.end = this.end.bind(this)
     this.dynamicAction = this.dynamicAction.bind(this)
   }
+
   // 初始化图层
   init() {
     // 添加面图层
@@ -249,12 +252,12 @@ class AreaMeasurement {
       type: 'fill',
       source: {
         type: 'geojson',
-        data: this.lineFeatureCollection
+        data: this.lineFeatureCollection,
       },
       paint: {
         'fill-color': '#ffff00',
-        'fill-opacity': 0.3
-      }
+        'fill-opacity': 0.3,
+      },
     })
     // 添加点图层
     this.map.addLayer({
@@ -262,14 +265,14 @@ class AreaMeasurement {
       type: 'circle',
       source: {
         type: 'geojson',
-        data: this.pointFeatureCollection
+        data: this.pointFeatureCollection,
       },
       paint: {
         'circle-color': '#ffffff',
         'circle-radius': 3,
         'circle-stroke-width': 2,
-        'circle-stroke-color': '#ffff00'
-      }
+        'circle-stroke-color': '#ffff00',
+      },
     })
   }
 
@@ -278,15 +281,15 @@ class AreaMeasurement {
     this.nodeCoordinateList = []
     this.pointFeatureCollection = {
       type: 'FeatureCollection',
-      features: []
+      features: [],
     }
     this.lineFeatureCollection = {
       type: 'FeatureCollection',
-      features: []
+      features: [],
     }
     this.polygonFeatureCollection = {
       type: 'FeatureCollection',
-      features: []
+      features: [],
     }
 
     this.dynamicMarkDom = document.createElement('div')
@@ -294,7 +297,7 @@ class AreaMeasurement {
     const option = {
       element: this.dynamicMarkDom,
       anchor: 'left',
-      offset: [8, 0]
+      offset: [8, 0],
     }
     this.dynamicMark = new Marker(option).setLngLat([0, 0]).addTo(this.map)
   }
@@ -324,7 +327,7 @@ class AreaMeasurement {
     const option = {
       element: this.dynamicMarkDom,
       anchor: 'center',
-      offset: [0, 0]
+      offset: [0, 0],
     }
     this.dynamicMarkDom.innerHTML = getPolygonArea(null, this.polygonFeatureCollection)
     this.dynamicMark = new Marker(option)
@@ -361,8 +364,8 @@ class AreaMeasurement {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: lngLat
-      }
+        coordinates: lngLat,
+      },
     })
     this.map.getSource('measurePointLayer2').setData(pointList)
 
@@ -377,27 +380,29 @@ class AreaMeasurement {
     const len = pointList.features.length
     if (len === 0) {
       this.dynamicMarkDom.innerHTML = '点击地图开始测量'
-    } else if (len === 1) {
+    }
+    else if (len === 1) {
       this.dynamicMarkDom.innerHTML = '点击地图继续绘制'
-    } else {
+    }
+    else {
       let pts = this.nodeCoordinateList.concat([lngLat])
       pts = pts.concat([this.nodeCoordinateList[0]])
       const json = {
         type: 'Feature',
         geometry: {
           type: 'Polygon',
-          coordinates: [pts]
-        }
+          coordinates: [pts],
+        },
       }
       this.map.getSource('measureFillLayer').setData(json)
       this.dynamicMarkDom.innerHTML = getPolygonArea(pts)
       this.polygonFeatureCollection = {
         type: 'FeatureCollection',
-        features: [json]
+        features: [json],
       }
     }
     this.dynamicMark.setLngLat(lngLat)
   }
 }
 
-export { DistanceMeasurement, AreaMeasurement }
+export { AreaMeasurement, DistanceMeasurement }

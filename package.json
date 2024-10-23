@@ -1,8 +1,8 @@
 {
-  "name": "@zx/mapbox-re",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@zx/mapbox-csw",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "main": "./dist/main.js",
   "module": "./dist/main.js",
   "types": "./dist/index.d.ts",
@@ -11,18 +11,27 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@turf/turf": "^7.1.0",
+    "axios": "^1.7.7",
     "mapbox-gl": "^3.7.0",
-    "vue": "^3.5.12"
+    "vue": "^3.5.10"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^3.8.0",
+    "@eslint/js": "^9.13.0",
     "@vitejs/plugin-vue": "^5.1.4",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.10",
-    "vue-tsc": "^2.1.6"
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.13.0",
+    "eslint-plugin-vue": "^9.29.1",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "unplugin-auto-import": "^0.18.3",
+    "vite": "^5.4.8"
   }
 }

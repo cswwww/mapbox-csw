@@ -10,7 +10,7 @@
  * Add a layer group placeholder layer to the map.
  *
  * @param {string} groupId - The ID of the group
- * @return {void} 
+ * @return {void}
  */
 // function addLayerGroup(groupId) {
 //   const map = this
@@ -32,35 +32,35 @@
  * Retrieves layers from the map that belong to a specific group, or returns unique groups if no groupId is provided.
  *
  * @param {string} groupId - The ID of the group to filter layers by.
- * @return {array|string} - An array of layers belonging to the specified group, or an array of unique group IDs if no groupId is provided.
+ * @return {Array | string} - An array of layers belonging to the specified group, or an array of unique group IDs if no groupId is provided.
  */
 function getLayerGroup(groupId) {
-  const map = this;
-  const layers = map.getStyle().layers || [];
+  const map = this
+  const layers = map.getStyle().layers || []
 
   if (groupId) {
-    return layers.filter(layer => layer.metadata?.group.includes(groupId));
+    return layers.filter(layer => layer.metadata?.group.includes(groupId))
   }
 
   const uniqueGroups = new Set(layers
     .filter(layer => layer.metadata?.group)
     .map(layer => layer.metadata.group)
-    .flat()
-  );
-  return Array.from(uniqueGroups);
+    .flat(),
+  )
+  return Array.from(uniqueGroups)
 }
 
 /**
  * Removes all layers belonging to the specified group ID from the map.
  *
  * @param {string} groupId - The ID of the group to remove layers for
- * @return {void} 
+ * @return {void}
  */
 function removeLayerGroup(groupId) {
   const map = this
   const layers = map.getStyle().layers || []
 
-  layers.forEach(layer => {
+  layers.forEach((layer) => {
     if (layer.metadata?.group?.includes(groupId)) {
       map.removeLayer(layer.id)
       map.removeSource(layer.id)
@@ -81,8 +81,8 @@ function addLayerToGroup(groupId, layerId) {
     ...layer.metadata,
     group: [
       ...layer.metadata.group,
-      groupId
-    ]
+      groupId,
+    ],
   }
 }
 
@@ -90,7 +90,7 @@ function showLayerGroup(groupId) {
   const map = this
   const layers = map.getStyle().layers || []
 
-  layers.forEach(layer => {
+  layers.forEach((layer) => {
     if (layer.metadata?.group?.includes(groupId)) {
       this.setLayoutProperty(layer.id, 'visibility', 'visible')
     }
@@ -101,7 +101,7 @@ function hideLayerGroup(groupId) {
   const map = this
   const layers = map.getStyle().layers || []
 
-  layers.forEach(layer => {
+  layers.forEach((layer) => {
     if (layer.metadata?.group?.includes(groupId)) {
       this.setLayoutProperty(layer.id, 'visibility', 'none')
     }

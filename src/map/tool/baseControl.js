@@ -5,7 +5,7 @@
  * @FilePath: \satellite-web\src\utils\map\tool\baseControl.js
  * @Description: 地图 - 控件
  */
-import { NavigationControl, ScaleControl, GeolocateControl, FullscreenControl } from 'mapbox-gl'
+import { FullscreenControl, GeolocateControl, NavigationControl, ScaleControl } from 'mapbox-gl'
 
 function loadBaseControl(map, item) {
   const baseControl = [
@@ -16,8 +16,8 @@ function loadBaseControl(map, item) {
       obj: new NavigationControl({
         visualizePitch: true,
         showCompass: true,
-        showZoom: true
-      })
+        showZoom: true,
+      }),
     },
     {
       id: 'ScaleControl',
@@ -25,8 +25,8 @@ function loadBaseControl(map, item) {
       active: false,
       obj: new ScaleControl({
         maxWidth: 100,
-        unit: 'metric' // 'imperial' , 'metric' or 'nautical'
-      })
+        unit: 'metric', // 'imperial' , 'metric' or 'nautical'
+      }),
     },
     {
       id: 'GeolocateControl',
@@ -35,18 +35,18 @@ function loadBaseControl(map, item) {
       obj: new GeolocateControl({
         // 定位
         positionOptions: {
-          enableHighAccuracy: true
+          enableHighAccuracy: true,
         },
         trackUserLocation: true,
-        showUserHeading: true
-      })
+        showUserHeading: true,
+      }),
     },
     {
       id: 'FullscreenControl',
       name: '全屏控件',
       active: false,
-      obj: new FullscreenControl({ container: document.querySelector('body') })
-    }
+      obj: new FullscreenControl({ container: document.querySelector('body') }),
+    },
   ]
 
   if (!item) {
@@ -59,7 +59,8 @@ function loadBaseControl(map, item) {
   }
   if (item.active) {
     map.addControl(item.obj) // 新增控件
-  } else {
+  }
+  else {
     map.removeControl(item.obj) // 移除控件
   }
 }

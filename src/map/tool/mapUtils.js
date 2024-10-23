@@ -1,11 +1,11 @@
 /*
  * @Date: 2023-12-29 16:24:39
- * @LastEditors: ReBeX  cswwww@163.com
- * @LastEditTime: 2024-07-25 09:51:10
- * @FilePath: \satellite-web\src\utils\map\tool\mapUtils.js
+ * @LastEditors: ReBeX  cswwwx@gmail.com
+ * @LastEditTime: 2024-10-23 18:50:00
+ * @FilePath: \mapbox-csw\src\map\tool\mapUtils.js
  * @Description: 工具 - 地图工具
  */
-import { lineString, length, polygon, area } from '@turf/turf'
+import { area, length, lineString, polygon } from '@turf/turf'
 
 /**
  * Calculates the distance between two points on a map.
@@ -15,12 +15,13 @@ import { lineString, length, polygon, area } from '@turf/turf'
  * @return {string} The distance between the two points in kilometers or meters.
  */
 export function getPointDistance(point1, point2) {
-  let line = lineString([point1, point2])
+  const line = lineString([point1, point2])
   let len = length(line)
   if (len < 1) {
-    len = Math.round(len * 1000) + 'm'
-  } else {
-    len = len.toFixed(2) + 'km'
+    len = `${Math.round(len * 1000)}m`
+  }
+  else {
+    len = `${len.toFixed(2)}km`
   }
   return len
 }
@@ -32,12 +33,13 @@ export function getPointDistance(point1, point2) {
  * @return {string} The distance of the line in kilometers or meters.
  */
 export function getLineDistance(pointList) {
-  let line = lineString(pointList)
+  const line = lineString(pointList)
   let len = length(line)
   if (len < 1) {
-    len = Math.round(len * 1000) + 'm'
-  } else {
-    len = len.toFixed(2) + 'km'
+    len = `${Math.round(len * 1000)}m`
+  }
+  else {
+    len = `${len.toFixed(2)}km`
   }
   return len
 }
@@ -51,9 +53,10 @@ export function getLineDistance(pointList) {
 export function getPolygonArea(pointList, feature) {
   let pArea = area(feature || polygon([pointList]))
   if (pArea < 10000) {
-    pArea = Math.round(pArea) + 'm²'
-  } else {
-    pArea = (pArea / 1000000).toFixed(2) + 'km²'
+    pArea = `${Math.round(pArea)}m²`
+  }
+  else {
+    pArea = `${(pArea / 1000000).toFixed(2)}km²`
   }
   return pArea
 }
@@ -61,24 +64,24 @@ export function getPolygonArea(pointList, feature) {
 /**
  * Exports the current map as an image.
  *
- * @param {Object} map - The map object.
+ * @param {object} map - The map object.
  * @param {boolean} download - Whether to download the image or not.
  * @return {string} The data URL of the exported image.
  */
-export function exportMap(map = map, download = false) {
+export function exportMap(map, download = false) {
   // 获取当前渲染的地图的 Canvas
   const mapCanvas = map.getCanvas()
   const dataURL = mapCanvas.toDataURL('image/png')
 
   if (download) {
     const link = document.createElement('a')
-    link.addEventListener('click', function () {
+    link.addEventListener('click', () => {
       link.href = dataURL
       link.download = '当前地图画面.png'
     })
     link.click()
     // 在下载完成后销毁链接元素
-    setTimeout(function () {
+    setTimeout(() => {
       URL.revokeObjectURL(link.href)
       link.remove()
     }, 0)
@@ -96,7 +99,7 @@ export function isValidLngLat(lngLatArray) {
   // 检查数组长度是否为2
   if (Array.isArray(lngLatArray) && lngLatArray.length === 2) {
     // 检查数组元素是否都是数字
-    if (lngLatArray.every((coord) => typeof coord === 'number' || typeof coord === 'string')) {
+    if (lngLatArray.every(coord => typeof coord === 'number' || typeof coord === 'string')) {
       // 经度的范围是 -180 到 180，纬度的范围是 -90 到 90
       const [lng, lat] = lngLatArray
       if (lng >= -180 && lng <= 180 && lat >= -90 && lat <= 90) {
