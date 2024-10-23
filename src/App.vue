@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { Map } from "mapbox-gl";
-// import { FillLayer, DrawLine } from "./map/index.js";
-// import fillData from "./data/fill.json";
-// import { polygonCut } from "./map/tool/editVector.js";
-// import * as turf from "@turf/turf";
+import { DrawCurve } from "./map/index.js";
 onMounted(() => {
   const singleMap = new Map({
     accessToken:
@@ -48,32 +45,10 @@ onMounted(() => {
       },
     });
 
-    // new FillLayer(
-    //   fillData,
-    //   "矢量面",
-    //   {
-    //     paint: {
-    //       "fill-color": "#000",
-    //       "fill-outline-color": "#0f0",
-    //     },
-    //   },
-    //   singleMap
-    // );
-    // const draw = new DrawLine(singleMap, (data: any) => {
-    //   console.log(data);
-    //   const lineString = turf.lineString(data);
-
-    //   const result = polygonCut(
-    //     fillData.features[0],
-    //     lineString,
-    //     0.001,
-    //     "kilometers"
-    //   );
-    //   console.log("result: ", result);
-
-    //   // singleMap.getSource("矢量面").setData(result);
-    // });
-    // draw.start();
+    const drawVector = new DrawCurve(singleMap, (data: any) => {
+      console.log('回调', data);
+    });
+    drawVector.start();
   });
 });
 </script>

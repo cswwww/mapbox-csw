@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-10-16 14:31:38
  * @LastEditors: ReBeX  cswwwx@gmail.com
- * @LastEditTime: 2024-10-16 20:56:42
+ * @LastEditTime: 2024-10-20 18:01:18
  * @FilePath: \mapbox-re\src\map\tool\editVector.js
  * @Description: 编辑矢量
  */
@@ -118,6 +118,7 @@ export const geoUtil = {
     }
     return polygon;
   },
+  // TODO BUG 
   /**
    * 线分割面
    * 面类型只能是polygon 但可以是环

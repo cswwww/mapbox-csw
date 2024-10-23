@@ -1,7 +1,7 @@
 /*
  * @Date: 2024-01-11 14:33:54
  * @LastEditors: ReBeX  cswwwx@gmail.com
- * @LastEditTime: 2024-10-17 14:30:05
+ * @LastEditTime: 2024-10-21 19:40:30
  * @FilePath: \mapbox-re\src\map\tool\drawVector.js
  * @Description: 工具 - 绘制矢量
  */
@@ -25,7 +25,7 @@ export class DrawLine {
   init() {
     // 添加线图层
     this.map.addLayer({
-      id: "measureLineLayer",
+      id: "_lineLayer",
       type: "line",
       source: {
         type: "geojson",
@@ -41,7 +41,7 @@ export class DrawLine {
 
     // 添加动态线图层
     this.map.addLayer({
-      id: "measureDynamicLineLayer",
+      id: "_dynamicLineLayer",
       type: "line",
       source: {
         type: "geojson",
@@ -57,7 +57,7 @@ export class DrawLine {
 
     // 添加点图层
     this.map.addLayer({
-      id: "measurePointLayer",
+      id: "_pointLayer",
       type: "circle",
       source: {
         type: "geojson",
@@ -85,7 +85,7 @@ export class DrawLine {
     };
   }
 
-  // 开始测量
+  // 开始绘制
   start() {
     this.reset();
     this.init();
@@ -98,7 +98,7 @@ export class DrawLine {
     this.map.on("mousemove", this.dynamicAction);
   }
 
-  // 结束测量
+  // 结束绘制
   end(e) {
     this.addPoint(e);
 
@@ -106,7 +106,7 @@ export class DrawLine {
     this.map.off("dblclick", this.end);
     this.map.off("mousemove", this.dynamicAction);
 
-    // this.map.once('click', (e) => {
+    // this.map.once('click', (e) => { // ! 连续绘制
     //   this.clear()
     //   this.start()
     // })
@@ -115,7 +115,7 @@ export class DrawLine {
     this.callback && this.callback(this.nodeCoordinateList);
   }
 
-  // 清除测量
+  // 清除绘制
   clear() {
     this.map.getCanvas().style.cursor = ""; // 恢复鼠标样式
 
@@ -124,17 +124,17 @@ export class DrawLine {
     this.map.off("dblclick", this.end);
     this.map.off("mousemove", this.dynamicAction);
 
-    if (this.map.getSource("measurePointLayer")) {
-      this.map.removeLayer("measurePointLayer");
-      this.map.removeSource("measurePointLayer");
+    if (this.map.getSource("_pointLayer")) {
+      this.map.removeLayer("_pointLayer");
+      this.map.removeSource("_pointLayer");
     }
-    if (this.map.getSource("measureLineLayer")) {
-      this.map.removeLayer("measureLineLayer");
-      this.map.removeSource("measureLineLayer");
+    if (this.map.getSource("_lineLayer")) {
+      this.map.removeLayer("_lineLayer");
+      this.map.removeSource("_lineLayer");
     }
-    if (this.map.getSource("measureDynamicLineLayer")) {
-      this.map.removeLayer("measureDynamicLineLayer");
-      this.map.removeSource("measureDynamicLineLayer");
+    if (this.map.getSource("_dynamicLineLayer")) {
+      this.map.removeLayer("_dynamicLineLayer");
+      this.map.removeSource("_dynamicLineLayer");
     }
   }
 
@@ -153,7 +153,7 @@ export class DrawLine {
           coordinates: [prev.geometry.coordinates, lngLat],
         },
       });
-      this.map.getSource("measureLineLayer").setData(lineList);
+      this.map.getSource("_lineLayer").setData(lineList);
     }
 
     pointList.features.push({
@@ -163,7 +163,7 @@ export class DrawLine {
         coordinates: lngLat,
       },
     });
-    this.map.getSource("measurePointLayer").setData(pointList);
+    this.map.getSource("_pointLayer").setData(pointList);
 
     this.nodeCoordinateList.push(lngLat);
   }
@@ -181,7 +181,7 @@ export class DrawLine {
           coordinates: [prev.geometry.coordinates, lngLat],
         },
       };
-      this.map.getSource("measureDynamicLineLayer").setData(json);
+      this.map.getSource("_dynamicLineLayer").setData(json);
     }
   }
 }
@@ -207,7 +207,7 @@ export class DrawRectangle {
   init() {
     // 添加面图层
     this.map.addLayer({
-      id: "measureFillLayer",
+      id: "_fillLayer",
       type: "fill",
       source: {
         type: "geojson",
@@ -220,7 +220,7 @@ export class DrawRectangle {
     });
     // 添加点图层
     this.map.addLayer({
-      id: "measurePointLayer2",
+      id: "_pointLayer2",
       type: "circle",
       source: {
         type: "geojson",
@@ -286,24 +286,24 @@ export class DrawRectangle {
     this.map.off("dblclick", this.end);
     this.map.off("mousemove", this.dynamicAction);
 
-    if (this.map.getSource("measurePointLayer2")) {
-      this.map.removeLayer("measurePointLayer2");
-      this.map.removeSource("measurePointLayer2");
+    if (this.map.getSource("_pointLayer2")) {
+      this.map.removeLayer("_pointLayer2");
+      this.map.removeSource("_pointLayer2");
     }
-    if (this.map.getSource("measureFillLayer")) {
-      this.map.removeLayer("measureFillLayer");
-      this.map.removeSource("measureFillLayer");
+    if (this.map.getSource("_fillLayer")) {
+      this.map.removeLayer("_fillLayer");
+      this.map.removeSource("_fillLayer");
     }
   }
 
   // 隐藏绘制
   show(flag) {
     if (flag) {
-      this.map.setLayoutProperty("measurePointLayer2", "visibility", "visible");
-      this.map.setLayoutProperty("measureFillLayer", "visibility", "visible");
+      this.map.setLayoutProperty("_pointLayer2", "visibility", "visible");
+      this.map.setLayoutProperty("_fillLayer", "visibility", "visible");
     } else {
-      this.map.setLayoutProperty("measurePointLayer2", "visibility", "none");
-      this.map.setLayoutProperty("measureFillLayer", "visibility", "none");
+      this.map.setLayoutProperty("_pointLayer2", "visibility", "none");
+      this.map.setLayoutProperty("_fillLayer", "visibility", "none");
     }
   }
 
@@ -319,7 +319,7 @@ export class DrawRectangle {
         coordinates: lngLat,
       },
     });
-    this.map.getSource("measurePointLayer2").setData(pointList);
+    this.map.getSource("_pointLayer2").setData(pointList);
 
     this.nodeCoordinateList.push(lngLat);
   }
@@ -340,7 +340,7 @@ export class DrawRectangle {
           coordinates: [pts],
         },
       };
-      this.map.getSource("measureFillLayer").setData(json);
+      this.map.getSource("_fillLayer").setData(json);
       this.polygonFeatureCollection = {
         type: "FeatureCollection",
         features: [json],
@@ -367,7 +367,7 @@ export class DrawCurve {
   init() {
     // 添加线图层
     this.map.addLayer({
-      id: "measureLineLayer",
+      id: "_lineLayer2",
       type: "line",
       source: {
         type: "geojson",
@@ -403,7 +403,7 @@ export class DrawCurve {
     this.map.on("mousemove", this.dynamicAction);
   }
 
-  // 结束测量
+  // 结束绘制
   end() {
     this.map.off("mousedown", this.addPoint);
     this.map.off("mouseup", this.end);
@@ -413,7 +413,7 @@ export class DrawCurve {
     this.callback && this.callback(this.nodeCoordinateList);
   }
 
-  // 清除测量
+  // 清除绘制
   clear() {
     this.map.dragPan.enable(); // 恢复双击缩放
     this.map.off("mousedown", this.addPoint);
@@ -421,18 +421,18 @@ export class DrawCurve {
     this.map.off("mousemove", this.dynamicAction);
     this.map.getCanvas().style.cursor = ""; // 恢复鼠标样式
 
-    if (this.map.getSource("measureLineLayer")) {
-      this.map.removeLayer("measureLineLayer");
-      this.map.removeSource("measureLineLayer");
+    if (this.map.getSource("_lineLayer2")) {
+      this.map.removeLayer("_lineLayer2");
+      this.map.removeSource("_lineLayer2");
     }
   }
 
   // 隐藏绘制
   show(flag) {
     if (flag) {
-      this.map.setLayoutProperty("measureLineLayer", "visibility", "visible");
+      this.map.setLayoutProperty("_lineLayer2", "visibility", "visible");
     } else {
-      this.map.setLayoutProperty("measureLineLayer", "visibility", "none");
+      this.map.setLayoutProperty("_lineLayer2", "visibility", "none");
     }
   }
 
@@ -458,7 +458,7 @@ export class DrawCurve {
           coordinates: [prev, lngLat],
         },
       });
-      this.map.getSource("measureLineLayer").setData(lineList);
+      this.map.getSource("_lineLayer2").setData(lineList);
     }
   }
 }
