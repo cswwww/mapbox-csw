@@ -1,8 +1,8 @@
 /*
  * @Date: 2023-12-20 09:39:13
- * @LastEditors: ReBeX  cswwww@163.com
- * @LastEditTime: 2024-05-13 13:40:09
- * @FilePath: \satellite-web\src\utils\map\layer\baseLayer.js
+ * @LastEditors: ReBeX  cswwwx@gmail.com
+ * @LastEditTime: 2024-10-28 17:12:59
+ * @FilePath: \mapbox-csw\src\map\layer\baseLayer.js
  * @Description: 图层 - 底图相关
  */
 
@@ -15,7 +15,7 @@
  *   name - 图层id
  *   url - 图层url
  */
-const tdtToken = '79949a020e54e2c239631b85e2222d9b' // 0a5eb6c7a016c54112aafab4b0a274ee , 79949a020e54e2c239631b85e2222d9b
+const tdtToken = '79949a020e54e2c239631b85e2222d9b'
 const baseLayer = [
   {
     id: '天地图矢量',
