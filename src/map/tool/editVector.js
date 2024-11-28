@@ -1,8 +1,8 @@
 /*
  * @Date: 2024-10-16 14:31:38
  * @LastEditors: ReBeX  cswwwx@gmail.com
- * @LastEditTime: 2024-10-20 18:01:18
- * @FilePath: \mapbox-re\src\map\tool\editVector.js
+ * @LastEditTime: 2024-11-08 11:16:41
+ * @FilePath: \mapbox-csw\src\map\tool\editVector.js
  * @Description: 编辑矢量
  */
 import * as turf from '@turf/turf'
@@ -20,6 +20,7 @@ export class EditVector {
  * @param {type} tolerance - 容差
  * @param {type} toleranceType - 容差类型
  * @return {type} 裁剪后的多边形
+ * @Reference: https://blog.csdn.net/GISShiXiSheng/article/details/121189322
  */
 export function polygonCut(
   poly,
