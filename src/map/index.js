@@ -1,19 +1,16 @@
 /*
  * @Date: 2024-01-13 17:06:20
  * @LastEditors: ReBeX  cswwwx@gmail.com
- * @LastEditTime: 2024-10-23 18:51:43
+ * @LastEditTime: 2024-12-03 13:55:44
  * @FilePath: \mapbox-csw\src\map\index.js
  * @Description: 地圖相关方法
  */
 
+export { createMap, MapInstance } from './createMapbox.js'
 export { addComponentMarker } from './event/mapMarker.js' // 地圖標記
 export { addComponentPopup, addImgPopup } from './event/mapPopup.js' // 地圖气泡
 export { pointerCursor } from './event/mouseEvent.js' // 鼠標事件
-// ! 地图事件
 export { spinGlobe } from './event/spinGlobe.js' // 地圖旋轉
-
-// ! 地图方法
-// * 实例图层 - 'instance-layerName' : 'instance-heatMapLayer'
 export {
   baseLayer,
   loadBaseLayer,
@@ -30,23 +27,16 @@ export { LineLayer } from './layer/lineLayer.js' // 矢量线
 export { RasterLayer } from './layer/rasterLayer.js' // 栅格影像
 export { SymbolLayer } from './layer/symbolLayer.js' // 矢量符号
 export { VectorLayer } from './layer/vectorLayer.js' // 矢量图层
-
-// ! 网络请求
-export { loadMapIcon, loadMapImage } from './request/mapService.js'
+export { loadMapIcon, loadMapImage } from './request/mapService.js' // 网络请求
 export { loadBaseControl } from './tool/baseControl.js' // 地图 - 控件
-// ! 数据格式化
-export { fixPolygonDirection } from './tool/dataFormat.js'
-// ! 地图工具方法及类
+export { fixPolygonDirection } from './tool/dataFormat.js' // 数据格式化
 export { DrawCurve, DrawLine, DrawRectangle } from './tool/drawVector.js' // 绘制矩形
-// ! 矢量编辑
-export { polygonCut } from './tool/editVector.js'
-
+export { polygonCut } from './tool/editVector.js' // 矢量编辑
 export {
   flyToFeature,
   flyToGuangdong,
   flyToPoint,
 } from './tool/fixedAndZoom.js'
-
 export {
   exportMap,
   getLineDistance,
@@ -54,5 +44,4 @@ export {
   getPolygonArea,
   isValidLngLat,
 } from './tool/mapUtils.js'
-
 export { AreaMeasurement, DistanceMeasurement } from './tool/measureTool.js' // 测量工具
