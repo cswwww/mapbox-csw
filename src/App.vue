@@ -1,5 +1,5 @@
 <script setup>
-import { createMap, DrawLine } from '@/map/index.js'
+import { createMap, DrawLine } from '@/utils/index.js'
 
 onMounted(() => {
   const mapInstance = createMap()

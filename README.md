@@ -1,4 +1,4 @@
-# Mapbox-CSW
+# mapbox-csw
 
 基于 Mapbox GL JS 的地图功能封装库。
 

@@ -15,7 +15,7 @@ export default defineConfig({
   })],
   build: {
     outDir: 'es', // 打包后文件目录
-    minify: true, // 压缩
+    // minify: true, // 压缩
     rollupOptions: {
       external: ['vue'], // 忽略打包vue文件
       // input: ["index.ts"],
@@ -27,7 +27,7 @@ export default defineConfig({
       },
     },
     lib: {
-      entry: resolve(__dirname, './src/map/index.js'),
+      entry: resolve(__dirname, './src/utils/index.js'),
       name: 'main',
       fileName: 'main',
       formats: ['es'], // 'umd', 'cjs'
