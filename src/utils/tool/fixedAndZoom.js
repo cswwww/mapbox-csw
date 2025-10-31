@@ -1,8 +1,8 @@
 /*
  * @Date: 2024-01-25 13:50:49
- * @LastEditors: ReBeX  cswwwx@gmail.com
- * @LastEditTime: 2024-09-15 16:45:37
- * @FilePath: \mapbox-re\src\map\tool\fixedAndZoom.js
+ * @LastEditors: ReBeX cswwwx@gmail.com
+ * @LastEditTime: 2025-10-31 11:46:24
+ * @FilePath: /mapbox-csw/src/utils/tool/fixedAndZoom.js
  * @Description: 定位與聚焦方法
  */
 
@@ -74,6 +74,33 @@ export function flyToPoint(lngLat, option, map) {
   })
 }
 
+/**
+ * Pan the map to a specific point with smooth animation
+ *
+ * @param {Array<number>} lngLat - The longitude and latitude to pan to [lng, lat]
+ * @param {object} option - Customizable options for the pan animation
+ * @param {number} option.duration - Duration of the animation in milliseconds, default is 1000
+ * @param {Array<number>} option.offset - Offset in pixels [x, y], default is [0, 0]
+ * @param {boolean} option.essential - Whether the animation is essential for user experience, default is true
+ * @param {object} map - The map object to pan
+ */
+export function panToPoint(lngLat, option, map) {
+  if (!isValidLngLat(lngLat)) {
+    console.log('無效的坐標值')
+    return
+  }
+  map.panTo(lngLat, {
+    duration: 1000,
+    offset: [0, 0],
+    essential: true,
+    ...option,
+  })
+}
+
+/**
+ * Fly to Guangdong province with default settings
+ * @param {object} map - The map object to fly on
+ */
 export function flyToGuangdong(map) {
   map.flyTo({
     curve: 1.42,

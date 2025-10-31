@@ -1,8 +1,8 @@
 /*
  * @Date: 2024-01-13 17:06:20
- * @LastEditors: ReBeX  cswwwx@gmail.com
- * @LastEditTime: 2024-12-03 13:55:44
- * @FilePath: \mapbox-csw\src\map\index.js
+ * @LastEditors: ReBeX cswwwx@gmail.com
+ * @LastEditTime: 2025-10-31 11:46:13
+ * @FilePath: /mapbox-csw/src/utils/index.js
  * @Description: 地圖相关方法
  */
 
@@ -36,6 +36,7 @@ export {
   flyToFeature,
   flyToGuangdong,
   flyToPoint,
+  panToPoint,
 } from './tool/fixedAndZoom.js'
 export {
   exportMap,
